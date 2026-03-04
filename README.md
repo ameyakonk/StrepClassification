@@ -7,6 +7,7 @@ Strep pharyngitis is an acute bacterial infection of the pharynx/tonsils caused 
 
 ### Documentation
 Following is the folder directory
+```text
 +---data
 |   +---cnh_dataset
 |   +---csv
@@ -24,7 +25,8 @@ Following is the folder directory
     |   \---__pycache__
     +---utils
     |   \---__pycache__
-    \---__pycache__
+    \---__pycache__)
+```
 
 ### Development Team
 Ameya Konkar | Master of Engineering, Robotics | University of Maryland, College Park
