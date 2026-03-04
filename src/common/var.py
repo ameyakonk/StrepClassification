@@ -1,0 +1,13 @@
+INPUT_CSV_FILE = "dataset_120.csv"
+UPDATED_CSV_FILE = "updated_dataset_120.csv"
+KAGGLE_CSV_FILE = "kaggle_dataset.csv"
+
+
+DEVICE = "cpu"
+MODEL_NAME = "multimodal.pth"
+IMG_RESIZE_DIM = (224, 224)
+IMG_CROP_DIM = (180, 180)
+LEARNING_RATE = 0.001
+WEIGHT_DECAY = 1e-2
+EPOCHS = 5
+    
