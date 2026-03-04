@@ -8,7 +8,7 @@ Strep pharyngitis is an acute bacterial infection of the pharynx/tonsils caused 
 ### Classification process
 
 #### Model
-The Convolutional Neural Network Model used is ResNet-18. The approach uses transfer learning to learning the throat features using the model. The last classification layer is removed and the model outputs 512 features. Every layer except the layer4 is frozen. The model trains the weights of layer4.   
+The Convolutional Neural Network Model used is ResNet-18. The approach uses transfer learning to learning the throat features using the model. The last fully connected layer is removed so that the model outputs 512 features. For model training, every layer except the layer4 is frozen. The model trains the weights only of the layer4.   
 
 ![Alt text for the image](images/resnet18.png)
 
@@ -20,7 +20,10 @@ White balancing is an image processing technique that removes unnatural color ca
 
 ![Alt text for the image](images/white_balance.png)
 
+
 ##### CLAHE
+CLAHE (Contrast Limited Adaptive Histogram Equalization) is an image processing technique used to enhance the contrast in throat images, making it a valuable preprocessing step for automated strep throat classification. When combined with smartphone imaging and machine learning, this method helps to better highlight features like tonsillar exudate, inflammation, and red spots.
+
 
 ### Folder Directory
 ```text
