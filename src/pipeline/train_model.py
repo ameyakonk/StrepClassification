@@ -17,6 +17,7 @@ class ModelTraining:
         self.val_loader = val_loader
         self.best_loss = float('inf')
         self.model_name = MODEL_NAME
+        self.auroc_metric = BinaryAUROC().to(DEVICE)
 
     def model_train(self):
         create_directory(MODEL_DIR)
@@ -37,7 +38,7 @@ class ModelTraining:
                 images, features, labels = images.to(DEVICE), features.to(DEVICE), labels.to(DEVICE).float()
 
                 optimizer.zero_grad()
-                outputs = self.strep_model(images, features.float()).view(-1) ## [batch_size, 1] -> [batch_size]
+                outputs = self.strep_model(images, features.float()).view(-1) ## [1, batch_size] -> [batch_size]
                 loss = criterion(outputs, labels)
                 loss.backward()
 
@@ -52,6 +53,7 @@ class ModelTraining:
 
             train_accuracy = 100 * correct_train / total_train
 
+            self.auroc_metric.reset()
             with torch.no_grad():
                 val_loss = 0.0
                 correct = 0.0
@@ -62,16 +64,20 @@ class ModelTraining:
                     
                     outputs = self.strep_model(images, features).view(-1)
                     val_loss += criterion(outputs, labels).item()
+
+                    probs = torch.sigmoid(outputs)
+                    self.auroc_metric.update(probs, labels.int())
                     
-                    # Convert probabilities to binary predictions (0 or 1)
+                    # probabilities to binary prediction
                     preds = (outputs > 0).float()
                     correct += (preds == labels).sum().item()
                     total += labels.size(0)
 
-            # Print progress
             avg_train_loss = train_loss / len(self.train_loader)
             avg_val_loss = val_loss / len(self.val_loader)
             accuracy = 100 * correct / total
+
+            epoch_auroc = self.auroc_metric.compute()
 
             if avg_val_loss < self.best_loss:
                 self.best_loss = avg_val_loss
@@ -82,5 +88,6 @@ class ModelTraining:
                     f"Train Loss: {avg_train_loss:.4f} | "
                     f"Train Acc: {train_accuracy:.4f} | "
                     f"Val Loss: {avg_val_loss:.4f} | "
-                    f"Val Acc: {accuracy:.2f}%")
+                    f"Val Acc: {accuracy:.2f}%  |"
+                    f"Val ROC-AUC: {epoch_auroc:.4f}")
                 

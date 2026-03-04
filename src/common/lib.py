@@ -3,6 +3,7 @@ import torch.nn as nn
 from torchvision import models
 from torchvision import transforms
 from torch.utils.data import Dataset, DataLoader, Subset
+from torchmetrics.classification import AUROC, BinaryAUROC
 from sklearn.model_selection import train_test_split
 from PIL import Image
 import pandas as pd

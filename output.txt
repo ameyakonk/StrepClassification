@@ -1,0 +1,21 @@
+Folder PATH listing for volume Windows
+Volume serial number is 427F-3B4C
+C:.
++---data
+|   +---cnh_dataset
+|   +---csv
+|   \---kaggle_dataset
+|       +---test
+|       \---train
+|           +---no
+|           \---phar
++---models
++---research
+\---src
+    +---common
+    |   \---__pycache__
+    +---pipeline
+    |   \---__pycache__
+    +---utils
+    |   \---__pycache__
+    \---__pycache__

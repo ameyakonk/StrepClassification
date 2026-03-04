@@ -14,10 +14,12 @@ class ModelEvaluation:
         self.classifier = ClassificationModel()
         self.strep_model = self.classifier.model
         self.test_loader = test_loader
+        self.auroc_metric = BinaryAUROC().to(DEVICE)
     
     def model_evaluate(self):
         criterion = nn.BCEWithLogitsLoss()
         self.classifier.load_model(MODEL_NAME)
+        self.auroc_metric.reset()
         with torch.no_grad(): 
             test_loss = 0.0
             correct = 0.0
@@ -34,9 +36,14 @@ class ModelEvaluation:
                 correct += (preds == labels).sum().item()
                 total += labels.size(0)
 
+                probs = torch.sigmoid(outputs)
+                self.auroc_metric.update(probs, labels.int())
+
             # Print progress
             avg_test_loss = test_loss / len(self.test_loader)
             accuracy = 100 * correct / total
+            epoch_auroc = self.auroc_metric.compute()
 
             logging.info( f"Test Loss: {avg_test_loss:.4f} | "
-                    f"Test Acc: {accuracy:.2f}%")
+                    f"Test Acc: {accuracy:.2f}% |"
+                    f"Val ROC-AUC: {epoch_auroc:.4f}")
