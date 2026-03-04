@@ -6,6 +6,25 @@
 Strep pharyngitis is an acute bacterial infection of the pharynx/tonsils caused by Streptococcus pyogenes (Group A Streptococcus, GAS). It is classified as an infectious pharyngitis, commonly presenting with abrupt fever, sore throat, and tonsillar exudates, often lacking cough or cold symptoms. The project focuses on classifying whether a patient has Strep pharyngitis using Deep Learning. The CNN model used is ResNet 18 followed by a Multi-Layer Perceptron.
 
 ### Documentation
+Following is the folder directory
++---data
+|   +---cnh_dataset
+|   +---csv
+|   \---kaggle_dataset
+|       +---test
+|       \---train
+|           +---no
+|           \---phar
++---models
++---research
+\---src
+    +---common
+    |   \---__pycache__
+    +---pipeline
+    |   \---__pycache__
+    +---utils
+    |   \---__pycache__
+    \---__pycache__
 
 ### Development Team
 Ameya Konkar | Master of Engineering, Robotics | University of Maryland, College Park
