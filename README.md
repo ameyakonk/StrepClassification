@@ -24,6 +24,8 @@ White balancing is an image processing technique that removes unnatural color ca
 ##### CLAHE
 CLAHE (Contrast Limited Adaptive Histogram Equalization) is an image processing technique used to enhance the contrast in throat images, making it a valuable preprocessing step for automated strep throat classification. When combined with smartphone imaging and machine learning, this method helps to better highlight features like tonsillar exudate, inflammation, and red spots.
 
+![Alt text for the image](images/CLAHE.png)
+
 
 ### Folder Directory
 ```text
