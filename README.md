@@ -6,7 +6,17 @@
 Strep pharyngitis is an acute bacterial infection of the pharynx/tonsils caused by Streptococcus pyogenes (Group A Streptococcus, GAS). It is classified as an infectious pharyngitis, commonly presenting with abrupt fever, sore throat, and tonsillar exudates, often lacking cough or cold symptoms. The project focuses on classifying whether a patient has Strep pharyngitis using Deep Learning. The CNN model used is ResNet-18 followed by a Multi-Layer Perceptron.
 
 ### Classification process
-The Convolutional Neural Network Model used is ResNet-18.
+
+#### Model
+The Convolutional Neural Network Model used is ResNet-18. The approach uses transfer learning to learning the throat features using the model. The last classification layer is removed and the model outputs 512 features. Every layer except the layer4 is frozen. The model trains the weights of layer4.   
+
+#### Dataset
+
+#### Image Processing.
+##### White Balancing
+White balancing is an image processing technique that removes unnatural color casts by adjusting the RGB channels so that neutral objects appear neutral white or gray. 
+
+##### CLAHE
 
 ### Folder Directory
 ```text
