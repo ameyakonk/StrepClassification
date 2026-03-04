@@ -10,11 +10,15 @@ Strep pharyngitis is an acute bacterial infection of the pharynx/tonsils caused 
 #### Model
 The Convolutional Neural Network Model used is ResNet-18. The approach uses transfer learning to learning the throat features using the model. The last classification layer is removed and the model outputs 512 features. Every layer except the layer4 is frozen. The model trains the weights of layer4.   
 
+![Alt text for the image](images/resnet18.png)
+
 #### Dataset
 
 #### Image Processing.
 ##### White Balancing
-White balancing is an image processing technique that removes unnatural color casts by adjusting the RGB channels so that neutral objects appear neutral white or gray. 
+White balancing is an image processing technique that removes unnatural color casts by adjusting the RGB channels so that neutral objects appear neutral white or gray. As the image is taken in the mouth, the redness of the mouth could be enhanced due to different lighting condition. To make the input image robust, we balance the image colors, so that we have consistent input to the model.
+
+![Alt text for the image](images/white_balance.png)
 
 ##### CLAHE
 
