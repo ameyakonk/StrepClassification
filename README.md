@@ -11,6 +11,12 @@ The Convolutional Neural Network Model used is ResNet-18. The approach uses tran
 ![Alt text for the image](images/resnet18.png)
 
 ## Dataset
+There are two datasets in the repository, the Children National Hospital(cnh) and the Kaggle dataset.
+1. Children National Hospital dataset:
+This dataset contains 120 images and 7 symptoms associated with every image. The labels are either positive or negative. The label split is 1:1
+
+2. (optional) Kaggle dataset
+This dataset contains 300+ images seperated in different folders based on pharyngitis and no pharyngitis. The label split is 3:2
 
 ## Image Processing.
 ### White Balancing
