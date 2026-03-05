@@ -32,7 +32,23 @@ CLAHE (Contrast Limited Adaptive Histogram Equalization) is an image processing 
 
 ## Image Augmentations.
 ### Image Resize
-The ResNet-18 generally expects image of dimension (224, 224). The input image from a dataset can be of different dimensions. Hence it is a good practice to 
+The ResNet-18 generally expects image of dimension (224, 224). The input image from a dataset can be of different dimensions. Hence, it is a good practice to have standard image size.
+
+### Image Random Crop
+Crops a random portion of the image (70% to 100% area) and resizes it to IMG_RESIZE_DIM. This helps the model handle scale variance and partial occlusions.
+
+### Image Random Rotation
+Rotates the image by up to ±20 degrees to account for varying camera angles.
+ 
+### Image Random Flip
+Randomly flips images horizontally (50% chance) to double the spatial diversity.
+
+### Image Color Jitter
+Randomly adjusts brightness, contrast, and saturation (±30%) and hue (±5%) to make the model robust to different lighting conditions and sensor types.
+
+### Image Random Blur
+Applies a slight blur (30% probability) to simulate out-of-focus or motion-blurred inputs.
+
 ## Folder Directory
 ```text
 +---data
