@@ -10,6 +10,17 @@ The Convolutional Neural Network Model used is ResNet-18. The approach uses tran
 
 ![Alt text for the image](images/resnet18.png)
 
+## Metrics
+### Training
+1. ROC-AUC
+2. Train loss
+3. Train accuracy
+   
+### Validation
+1. ROC-AUC
+2. Validation loss
+3. Validation accuracy
+
 ## Dataset
 There are two datasets in the repository, the Children National Hospital(cnh) and the Kaggle dataset.
 1. Children National Hospital dataset:
@@ -32,7 +43,23 @@ CLAHE (Contrast Limited Adaptive Histogram Equalization) is an image processing 
 
 ## Image Augmentations.
 ### Image Resize
-The ResNet-18 generally expects image of dimension (224, 224). The input image from a dataset can be of different dimensions. Hence it is a good practice to 
+The ResNet-18 generally expects image of dimension (224, 224). The input image from a dataset can be of different dimensions. Hence, it is a good practice to have standard image size.
+
+### Image Random Crop
+Crops a random portion of the image (70% to 100% area) and resizes it to IMG_RESIZE_DIM. This helps the model handle scale variance and partial occlusions.
+
+### Image Random Rotation
+Rotates the image by up to ±20 degrees to account for varying camera angles.
+ 
+### Image Random Flip
+Randomly flips images horizontally (50% chance) to double the spatial diversity.
+
+### Image Color Jitter
+Randomly adjusts brightness, contrast, and saturation (±30%) and hue (±5%) to make the model robust to different lighting conditions and sensor types.
+
+### Image Random Blur
+Applies a slight blur (30% probability) to simulate out-of-focus or motion-blurred inputs.
+
 ## Folder Directory
 ```text
 +---data
@@ -80,21 +107,29 @@ git clone --recursive https://github.com/ameyakonk/StrepClassification.git
 pip3 install -r requirements.txt
 ```
 
-Run main.py file in the root directory to train model and evaluate it. (Note: Make sure the python interpretor is from the conda environment).
+## Run instructions
+(Note: Make sure the python interpretor is from the conda environment).
 There are two datasets:
 1. cnh_dataset  (Children's National Hospital)
-2. kaggle_dataset
+2. (Optional) kaggle_dataset
 
-Default: cnh
+#### Training Default: cnh
 ```
-python3 main.py 
+python3 train.py
 ```
 (Optional)
 for Kaggle dataset
 
 ```
-python3 main.py --dataset kaggle
+python3 train.py --dataset kaggle
 ```
+
+#### Evaluation
+```
+python3 eval.py
+```
+
+
 
 
 
