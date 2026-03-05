@@ -65,21 +65,21 @@ Create an Anaconda pseudo environment
 ```
 conda create --name <env_name> python=3.10
 conda activate <env_name>
-pip3 install -r requirements.txt
 ```
 Clone the git repo
 ```
 cd <workspace>
 sudo apt-get install git
 git clone --recursive https://github.com/ameyakonk/StrepClassification.git
-
+pip3 install -r requirements.txt
 ```
+
 Run main.py file in the root directory to train model and evaluate it. (Note: Make sure the python interpretor is from the conda environment).
 There are two datasets:
-1. cnh_dataset
+1. cnh_dataset  (Children's National Hospital)
 2. kaggle_dataset
-To choose between the two, pass the "cnh" for cnh_dataset or "kaggle" for kaggle_dataset. 
-Default
+
+Default: cnh
 ```
 python3 main.py 
 ```
