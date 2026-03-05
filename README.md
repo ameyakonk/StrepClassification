@@ -2,27 +2,32 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ---
 
-### Project Overview and Description
+## Project Overview and Description
 Strep pharyngitis is an acute bacterial infection of the pharynx/tonsils caused by Streptococcus pyogenes (Group A Streptococcus, GAS). It is classified as an infectious pharyngitis, commonly presenting with abrupt fever, sore throat, and tonsillar exudates, often lacking cough or cold symptoms. The project focuses on classifying whether a patient has Strep pharyngitis using Deep Learning. The CNN model used is ResNet-18 followed by a Multi-Layer Perceptron.
 
-### Classification process
-
-#### Model
-The Convolutional Neural Network Model used is ResNet-18. The approach uses transfer learning to learning the throat features using the model. The last classification layer is removed and the model outputs 512 features. Every layer except the layer4 is frozen. The model trains the weights of layer4.   
+## Model
+The Convolutional Neural Network Model used is ResNet-18. The approach uses transfer learning to learning the throat features using the model. The last fully connected layer is removed so that the model outputs 512 features. For model training, every layer except the layer4 is frozen. The model trains the weights only of the layer4.   
 
 ![Alt text for the image](images/resnet18.png)
 
-#### Dataset
+## Dataset
 
-#### Image Processing.
-##### White Balancing
+## Image Processing.
+### White Balancing
 White balancing is an image processing technique that removes unnatural color casts by adjusting the RGB channels so that neutral objects appear neutral white or gray. As the image is taken in the mouth, the redness of the mouth could be enhanced due to different lighting condition. To make the input image robust, we balance the image colors, so that we have consistent input to the model.
 
 ![Alt text for the image](images/white_balance.png)
 
-##### CLAHE
 
-### Folder Directory
+### CLAHE
+CLAHE (Contrast Limited Adaptive Histogram Equalization) is an image processing technique used to enhance the contrast in throat images, making it a valuable preprocessing step for automated strep throat classification. When combined with smartphone imaging and machine learning, this method helps to better highlight features like tonsillar exudate, inflammation, and red spots.
+
+![Alt text for the image](images/CLAHE.png)
+
+## Image Augmentations.
+### Image Resize
+The ResNet-18 generally expects image of dimension (224, 224). The input image from a dataset can be of different dimensions. Hence it is a good practice to 
+## Folder Directory
 ```text
 +---data
 |   +---cnh_dataset
@@ -44,17 +49,17 @@ White balancing is an image processing technique that removes unnatural color ca
     \---__pycache__)
 ```
 
-### Development Team
+## Development Team
 Ameya Konkar | Master of Engineering, Robotics | University of Maryland, College Park
 
-### External Dependencies
+## External Dependencies
 - [Anaconda](https://anaconda.org/)
 - [Opencv](https://github.com/opencv/opencv)
 - [sklearn](https://scikit-learn.org/)
 - [PyTorch](https://pytorch.org/)
 - [Pandas](https://pandas.pydata.org/)
 
-### Installation instructions
+## Installation instructions
 Install Anaconda on your Operating System
 Create an Anaconda pseudo environment
 ```
