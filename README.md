@@ -24,7 +24,9 @@ CLAHE (Contrast Limited Adaptive Histogram Equalization) is an image processing 
 
 ![Alt text for the image](images/CLAHE.png)
 
-
+## Image Augmentations.
+### Image Resize
+The ResNet-18 generally expects image of dimension (224, 224). The input image from a dataset can be of different dimensions. Hence it is a good practice to 
 ## Folder Directory
 ```text
 +---data
