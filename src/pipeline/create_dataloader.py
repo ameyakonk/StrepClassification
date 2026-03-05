@@ -20,7 +20,7 @@ class StrepDataset(Dataset):
         if self.transform:
             image = self.transform(image)
         
-        features = torch.tensor(self.data.iloc[idx, 2:9])
+        features = torch.tensor(self.data.iloc[idx, 2:9].values.astype(int))
 
         label = torch.tensor(self.data.iloc[idx, 1])
 
@@ -29,14 +29,14 @@ class StrepDataset(Dataset):
 #################################################################################
 
 class CreateDataloader:
-    def __init__(self, train_idx, test_idx, val_idx, dataset):
+    def __init__(self, train_idx, test_idx, val_idx):
         self.transforms_train = transforms.Compose([])
         self.transforms_test = transforms.Compose([])
         self.ip = ImageProcessing()
         self.train_idx = train_idx
         self.test_idx = test_idx
         self.val_idx = val_idx
-        self.dataset = dataset
+        self.dataset = torch.load(os.path.join(ARGS_CONFIG_DIR,ARGS_CONFIG_NAME), weights_only=False)['dataset']
     
     def create_transforms(self):
         self.transforms_train = transforms.Compose([
@@ -61,28 +61,60 @@ class CreateDataloader:
         ])
 
 
-    def create_dataloader(self):
+    def create_train_dataloader(self, batch_size):
         
         self.create_transforms() 
 
         ## Created datasets for the train and test data with individual transforms
         if self.dataset == "cnh":
             train_dataset = StrepDataset(csv=UPDATED_CSV_FILE, img_dir=IMG_DIR, transform=self.transforms_train)
-            test_dataset = StrepDataset(csv=UPDATED_CSV_FILE, img_dir=IMG_DIR, transform=self.transforms_test)
 
         else:
             train_dataset = StrepDataset(csv=KAGGLE_CSV_FILE, img_dir=KAGGLE_IMG_DIR, transform=self.transforms_train)
-            test_dataset = StrepDataset(csv=KAGGLE_CSV_FILE, img_dir=KAGGLE_IMG_DIR, transform=self.transforms_test)
 
         ## Created Subsets for the train and test dataset indices
         train_subset = Subset(train_dataset, self.train_idx)
-        test_subset = Subset(test_dataset, self.test_idx)
-        val_subset = Subset(test_dataset, self.val_idx)
 
         ## Created Dataloaders for the train and test dataset 
-        train_loader = DataLoader(train_subset, batch_size=16, shuffle=True)
-        test_loader = DataLoader(test_subset, batch_size=16, shuffle=True)
-        val_loader = DataLoader(val_subset, batch_size=16, shuffle=True)
+        train_loader = DataLoader(train_subset, batch_size=batch_size, shuffle=True)
+
+        return train_loader
+    
+    def create_val_dataloader(self, batch_size):
+        
+        self.create_transforms() 
+
+        ## Created datasets for the train and test data with individual transforms
+        if self.dataset == "cnh":
+            val_dataset = StrepDataset(csv=UPDATED_CSV_FILE, img_dir=IMG_DIR, transform=self.transforms_test)
+
+        else:
+            val_dataset = StrepDataset(csv=KAGGLE_CSV_FILE, img_dir=KAGGLE_IMG_DIR, transform=self.transforms_test)
+
+        ## Created Subsets for the train and test dataset indices
+        val_subset = Subset(val_dataset, self.val_idx)
+
+        ## Created Dataloaders for the train and test dataset 
+        val_loader = DataLoader(val_subset, batch_size=batch_size, shuffle=True)
 
 
-        return train_loader, test_loader, val_loader
+        return  val_loader
+    
+    def create_test_dataloader(self, batch_size):
+        
+        self.create_transforms() 
+
+        ## Created datasets for the train and test data with individual transforms
+        if self.dataset == "cnh":
+            test_dataset = StrepDataset(csv=UPDATED_CSV_FILE, img_dir=IMG_DIR, transform=self.transforms_test)
+
+        else:
+            test_dataset = StrepDataset(csv=KAGGLE_CSV_FILE, img_dir=KAGGLE_IMG_DIR, transform=self.transforms_test)
+
+        ## Created Subsets for the train and test dataset indices
+        test_subset = Subset(test_dataset, self.test_idx)
+
+        ## Created Dataloaders for the train and test dataset 
+        test_loader = DataLoader(test_subset, batch_size=batch_size, shuffle=True)
+
+        return test_loader

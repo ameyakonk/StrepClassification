@@ -43,7 +43,9 @@ class ModelEvaluation:
             avg_test_loss = test_loss / len(self.test_loader)
             accuracy = 100 * correct / total
             epoch_auroc = self.auroc_metric.compute()
-
+            
+            print()
             logging.info( f"Test Loss: {avg_test_loss:.4f} | "
                     f"Test Acc: {accuracy:.2f}% |"
                     f"Val ROC-AUC: {epoch_auroc:.4f}")
+            print()

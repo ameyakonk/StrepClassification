@@ -5,6 +5,7 @@ KAGGLE_CSV_FILE = "kaggle_dataset.csv"
 
 DEVICE = "cpu"
 MODEL_NAME = "multimodal.pth"
+ARGS_CONFIG_NAME = 'eval_metadata.pt'
 IMG_RESIZE_DIM = (224, 224)
 IMG_CROP_DIM = (180, 180)
 LEARNING_RATE = 0.001

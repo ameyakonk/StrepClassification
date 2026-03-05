@@ -7,12 +7,13 @@ logging.basicConfig(level=logging.INFO, format='[%(asctime)s]: %(message)s:')
 STAGE_NAME = "Data Ingestion"
 
 class DataIngestion:
-    def __init__(self, dataset:str):
+    def __init__(self):
         self.train_idx = []
         self.test_idx = []
-        self.dataset = dataset
+        self.dataset = torch.load(os.path.join(ARGS_CONFIG_DIR, ARGS_CONFIG_NAME), weights_only=False)['dataset']
 
     def data_ingestion(self):
+        print(self.dataset)
         if self.dataset == "cnh":
             df = read_csv(INPUT_CSV_FILE)
             df = df.drop(columns=['patient_id'])

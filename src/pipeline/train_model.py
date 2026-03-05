@@ -15,7 +15,7 @@ class ModelTraining:
         self.strep_model = self.classifier.model
         self.train_loader = train_loader
         self.val_loader = val_loader
-        self.best_loss = float('inf')
+        self.best_auroc = float(0)
         self.model_name = MODEL_NAME
         self.auroc_metric = BinaryAUROC().to(DEVICE)
 
@@ -79,15 +79,17 @@ class ModelTraining:
 
             epoch_auroc = self.auroc_metric.compute()
 
-            if avg_val_loss < self.best_loss:
-                self.best_loss = avg_val_loss
+            if epoch_auroc > self.best_auroc:
+                self.best_auroc = epoch_auroc
                 self.classifier.save_model(self.strep_model.state_dict(), self.model_name)
-                logging.info(f"Model saved with loss: {avg_val_loss:.4f}")
-
+                logging.info(f"Model saved with ROC-AUC: {epoch_auroc:.4f}")
+            
+            print()
             logging.info(f"Epoch [{epoch+1}/{epochs}] "
                     f"Train Loss: {avg_train_loss:.4f} | "
                     f"Train Acc: {train_accuracy:.4f} | "
                     f"Val Loss: {avg_val_loss:.4f} | "
                     f"Val Acc: {accuracy:.2f}%  |"
                     f"Val ROC-AUC: {epoch_auroc:.4f}")
+            print()
                 
