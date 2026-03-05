@@ -62,7 +62,6 @@ class CreateDataloader:
 
 
     def create_train_dataloader(self, batch_size):
-        
         self.create_transforms() 
 
         ## Created datasets for the train and test data with individual transforms

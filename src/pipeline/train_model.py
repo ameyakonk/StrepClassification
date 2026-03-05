@@ -16,6 +16,8 @@ class ModelTraining:
         self.train_loader = train_loader
         self.val_loader = val_loader
         self.best_auroc = float(0)
+        self.train_loss = float(0)
+        self.train_acc = float(0)
         self.model_name = MODEL_NAME
         self.auroc_metric = BinaryAUROC().to(DEVICE)
 
@@ -81,6 +83,8 @@ class ModelTraining:
 
             if epoch_auroc > self.best_auroc:
                 self.best_auroc = epoch_auroc
+                self.train_acc = train_accuracy
+                self.train_loss = avg_train_loss
                 self.classifier.save_model(self.strep_model.state_dict(), self.model_name)
                 logging.info(f"Model saved with ROC-AUC: {epoch_auroc:.4f}")
             
@@ -92,4 +96,9 @@ class ModelTraining:
                     f"Val Acc: {accuracy:.2f}%  |"
                     f"Val ROC-AUC: {epoch_auroc:.4f}")
             print()
-                
+        
+        print()
+        logging.info(f"Train Loss: {self.train_loss:.4f} | "
+                    f"Train Acc: {self.train_acc:.4f} | "
+            f"Best ROC-AUC: {self.best_auroc:.4f}")
+        print()

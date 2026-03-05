@@ -40,8 +40,8 @@ STAGE_NAME = "Prepare Data Loader"
 try:
     logging.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
     create_dataloader = CreateDataloader(train_idx, test_dx, val_idx)
-    train_loader = create_dataloader.create_train_dataloader(16)
-    val_loader = create_dataloader.create_val_dataloader(16)
+    train_loader = create_dataloader.create_train_dataloader(TRAIN_BATCH_SIZE)
+    val_loader = create_dataloader.create_val_dataloader(VAL_BATCH_SIZE)
     logging.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx===========x")
 except Exception as e:
     logging.exception(e)

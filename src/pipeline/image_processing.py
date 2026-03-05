@@ -2,7 +2,9 @@ from src.common.lib import *
 from src.common.dir import *
 from src.common.var import *
 from src.utils.utils import *
+import logging
 
+logging.basicConfig(level=logging.INFO, format='[%(asctime)s]: %(message)s:')
 class ImageProcessing:
     def __init__(self):
         pass  
@@ -53,6 +55,24 @@ class ImageProcessing:
         axes[1].axis('off')
         
         plt.show()
+    
+    def get_dataset_stats(self, dataloader):
+        pixel_sum = torch.zeros(3)
+        pixel_squared_sum = torch.zeros(3)
+        batches = 0
+        
+        for img, _, _ in dataloader:
+            pixel_sum += torch.mean(img, dim=[0, 2, 3])              ## averages accross [batch, height, width]
+            pixel_squared_sum += torch.mean(img**2, dim=[0, 2, 3])   ## squared averages accross [batch, height, width]
+            batches += 1
+
+        mean = pixel_sum/batches
+        std = (pixel_squared_sum / batches - mean ** 2) ** 0.5        ## std = (E[X**2] - E[x]**2)**0.5
+        logging.info(f"Mean: {mean}") 
+        logging.info(f"Std: {std}")
+        return mean, std
+
+
 
 if __name__ == "__main__":
 
