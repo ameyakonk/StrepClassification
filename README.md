@@ -65,7 +65,7 @@ Create an Anaconda pseudo environment
 ```
 conda create --name <env_name> python=3.10
 conda activate <env_name>
-pip3 install requirements.txt
+pip3 install -r requirements.txt
 ```
 Clone the git repo
 ```
@@ -78,7 +78,14 @@ Run main.py file in the root directory to train model and evaluate it. (Note: Ma
 There are two datasets:
 1. cnh_dataset
 2. kaggle_dataset
-To choose between the two, pass the "cnh" for cnh_dataset or "kaggle" for kaggle_dataset. For e.g.
+To choose between the two, pass the "cnh" for cnh_dataset or "kaggle" for kaggle_dataset. 
+Default
+```
+python3 main.py 
+```
+(Optional)
+for Kaggle dataset
+
 ```
 python3 main.py --dataset kaggle
 ```
