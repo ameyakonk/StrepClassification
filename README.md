@@ -10,6 +10,17 @@ The Convolutional Neural Network Model used is ResNet-18. The approach uses tran
 
 ![Alt text for the image](images/resnet18.png)
 
+## Metrics
+### Training
+1. ROC-AUC
+2. Train loss
+3. Train accuracy
+   
+### Validation
+1. ROC-AUC
+2. Validation loss
+3. Validation accuracy
+
 ## Dataset
 There are two datasets in the repository, the Children National Hospital(cnh) and the Kaggle dataset.
 1. Children National Hospital dataset:
@@ -117,6 +128,7 @@ python3 train.py --dataset kaggle
 ```
 python3 eval.py
 ```
+
 
 
 
