@@ -96,21 +96,28 @@ git clone --recursive https://github.com/ameyakonk/StrepClassification.git
 pip3 install -r requirements.txt
 ```
 
-Run main.py file in the root directory to train model and evaluate it. (Note: Make sure the python interpretor is from the conda environment).
+## Run instructions
+(Note: Make sure the python interpretor is from the conda environment).
 There are two datasets:
 1. cnh_dataset  (Children's National Hospital)
-2. kaggle_dataset
+2. (Optional) kaggle_dataset
 
-Default: cnh
+#### Training Default: cnh
 ```
-python3 main.py 
+python3 train.py
 ```
 (Optional)
 for Kaggle dataset
 
 ```
-python3 main.py --dataset kaggle
+python3 train.py --dataset kaggle
 ```
+
+#### Evaluation
+```
+python3 eval.py
+```
+
 
 
 
