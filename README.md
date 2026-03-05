@@ -94,6 +94,7 @@ Ameya Konkar | Master of Engineering, Robotics | University of Maryland, College
 
 ## Installation instructions
 Install Anaconda on your Operating System
+
 Create an Anaconda pseudo environment
 ```
 conda create --name <env_name> python=3.10
